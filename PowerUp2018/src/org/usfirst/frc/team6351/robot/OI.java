@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6351.robot;
 
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -46,4 +47,30 @@ public class OI {
 	public Button joystick10 = new JoystickButton(flightstick1, RobotMap.Joy_Button_10);
 	public Button joystick12 = new JoystickButton(flightstick1, RobotMap.Joy_Button_12);
 	
+	public OI() {
+		
+	}
+	
+	//Method for getting an axis value on the driver joystick
+		public double controllerDriverAxisValue (int axis) {
+			
+			return driver1.getRawAxis(axis);
+			
+		}
+		public double controllerControllerAxisValue (int axis) {
+//			if (controller1.getRawAxis(axis) > RobotMap.Deadzone_Minimum)
+			return controller1.getRawAxis(axis);
+			
+		}
+		public double joystickAxisValue (int axis) {
+			
+			return flightstick1.getRawAxis(axis);
+			
+		}
+		public double joystickPOVAngle (int axis) {
+			
+			return flightstick1.getPOV(); 
+			
+		}
 }
+

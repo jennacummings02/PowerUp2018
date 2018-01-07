@@ -7,32 +7,18 @@ package org.usfirst.frc.team6351.robot;
  * floating around.
  */
 public class RobotMap {
-	public static final double Tank_Drive_Scaling_Teleop = 0.6;
 	public static final double Drive_Scaling_Auto = 0.4;
-	public static final double Tank_Drive_Precision_Scaling_Teleop = 0.2;
-	
-	public static final double GTA_Drive_Scaling_Teleop = 0.6;
-	public static final double GTA_Drive_Precision_Scaling_Teleop = 0.2;
-	
-	public static final double Deadzone_Minimum = 0.03;
-	
+	public static final double Drive_Scaling_Teleop = 0.6;
+
 	public static final int Motor_Front_Left  = 1;
 	public static final int Motor_Back_Left = 2;
 	public static final int Motor_Front_Right = 3;
 	public static final int Motor_Back_Right = 4;
 	
-	public static final int Spark_Controller_Spinner = 9;
-	public static final int Spark_Controller_Shooter = 8;
-	public static final int Spark_Controller_HopperMixer = 7;
-	public static final int Spark_Controller_Climber = 6;
-	
-	public static final int Talon_Controller_LightRing = 5;
-	
-	public static final int Solenoid_1 = 1;
-	public static final int Solenoid_2 = 2;
+	public static final double MAX_ROBOT_SPEED = 0.99;
+	public static final double MIN_ROBOT_SPEED = -0.99;
 
 	// Microsoft XBox Controller
-	
 	public static final int Controller1_Left_Y_Axis = 1;
 	public static final int Controller1_Right_Y_Axis = 5;
 	public static final int Controller1_Left_X_Axis = 0;
@@ -47,7 +33,6 @@ public class RobotMap {
 	public static final int Controller1_Y_Button = 4;	
 	
 	// Logitech Generic Controller
-	
 	public static final int Controller2_Right_Trigger = 8;
 	public static final int Controller2_Left_Trigger = 7;
 	public static final int Controller2_A_Button = 2;
@@ -55,15 +40,7 @@ public class RobotMap {
 	public static final int Controller2_X_Button = 1;
 	public static final int Controller2_Y_Button = 4;
 	
-	public static final double TELEOP_MAX_ROBOT_SPEED = 0.99;
-	public static final double TELEOP_MIN_ROBOT_SPEED = -0.99;
-	
-
-	public static final int MJPEG_WIDTH = 480;
-	public static final int MJPEG_HEIGHT = 240;
-	
 	//LogitechJoystick
-	
 	public static final int Joy_Y_Axis = 1;
 	public static final int Joy_Z_Axis = 2;
 	public static final int Joy_X_Axis = 0;

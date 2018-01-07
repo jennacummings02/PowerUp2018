@@ -1,10 +1,15 @@
 package org.usfirst.frc.team6351.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team6351.robot.commands.FlightStickDrive;
+import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 
 /**
@@ -17,11 +22,18 @@ import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
 	public static final DriveTrain driveTrain = new DriveTrain();
-	
 	public static OI m_oi;
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> driveMode = new SendableChooser<>();
 
+	static NetworkTableInstance networktables = NetworkTableInstance.getDefault();
+	public static final NetworkTable limelight = networktables.getTable("limelight");
+	public static double targetX;
+	public static double targetY;
+	public static double targetArea;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -32,6 +44,11 @@ public class Robot extends TimedRobot {
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());
+	    driveMode.addDefault("Two-Person GTA Control", new GTADrive());
+	    SmartDashboard.putData("Drive Control Mode", driveMode);
+
 	}
 
 	/**
@@ -83,6 +100,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		getLimeLight();
 	}
 
 	@Override
@@ -102,12 +120,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		getLimeLight();
 	}
-
-//	/**
-//	 * This function is called periodically during test mode.
-//	 */
-//	@Override
-//	public void testPeriodic() {
-//	}
+	
+	public void getLimeLight() {
+		targetX = limelight.getEntry("tx").getDouble(0);
+		targetY = limelight.getEntry("ty").getDouble(0);
+		targetArea = limelight.getEntry("ta").getDouble(0);
+	}
 }

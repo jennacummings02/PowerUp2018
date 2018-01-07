@@ -1,42 +1,49 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package org.usfirst.frc.team6351.robot;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
+	public Joystick driver1 = new Joystick(0);
+	public Joystick controller1 = new Joystick(2);
+	public Joystick flightstick1 = new Joystick(1);
+	
+	
+	// Logitech Controller for Secondary Driver
+	
+	public Button controllerA = new JoystickButton(controller1, RobotMap.Controller2_A_Button);
+	public Button controllerB = new JoystickButton(controller1, RobotMap.Controller2_B_Button);
+	public Button controllerX = new JoystickButton(controller1, RobotMap.Controller2_X_Button);
+	public Button controllerY = new JoystickButton(controller1, RobotMap.Controller2_Y_Button);
+	
+	public Button controllerLeftBumper = new JoystickButton(controller1, RobotMap.Controller1_Left_Bumper);
+	public Button controllerRightBumper = new JoystickButton(controller1, RobotMap.Controller1_Right_Bumper);
+	
+	public Button controllerLeftTrigger = new JoystickButton(controller1, RobotMap.Controller2_Left_Trigger);
+	public Button controllerRightTrigger = new JoystickButton(controller1, RobotMap.Controller2_Right_Trigger);
 
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
+	// Microsoft Controller for Primary Driver
+	
+	public Button driverA = new JoystickButton(driver1, 1);
+	public Button driverB = new JoystickButton(driver1, 2);
+	public Button driverX = new JoystickButton(driver1, 3);
+	public Button driverY = new JoystickButton(driver1, 4);
+		
+	public Button driverLeftBumper = new JoystickButton(driver1, RobotMap.Controller1_Left_Bumper);
+	public Button driverRightBumper = new JoystickButton(driver1, RobotMap.Controller1_Right_Bumper);
+		
+	//Logitech Flight Stick
+	
+	public Button joystick1 = new JoystickButton(flightstick1, RobotMap.Joy_Button_1);
+	public Button joystick3 = new JoystickButton(flightstick1, RobotMap.Joy_Button_3);
+	public Button joystick7 = new JoystickButton(flightstick1, RobotMap.Joy_Button_7);
+	public Button joystick11 = new JoystickButton(flightstick1, RobotMap.Joy_Button_11);
+	public Button joystick10 = new JoystickButton(flightstick1, RobotMap.Joy_Button_10);
+	public Button joystick12 = new JoystickButton(flightstick1, RobotMap.Joy_Button_12);
+	
 }

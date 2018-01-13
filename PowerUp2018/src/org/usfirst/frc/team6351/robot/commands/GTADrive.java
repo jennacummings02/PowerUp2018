@@ -26,8 +26,8 @@ public class GTADrive extends Command {
     	double leftJoystickXAxis = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_X_Axis);
     	   
     	//Creating motor variables
-    	double leftMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop*(-1);
-    	double rightMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop;
+    	double leftMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop;
+    	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop*(-1);
     	
     	if (leftMotors > RobotMap.MAX_ROBOT_SPEED) {
     		   

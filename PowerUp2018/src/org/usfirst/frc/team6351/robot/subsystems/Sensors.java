@@ -41,8 +41,8 @@ public class Sensors extends Subsystem {
     public double getUltrasonicDistance() {
     	// Convert the volts from the function to millivolts
     double voltstomilivolts = ultrasonic.getVoltage() * 1000;
-    // Convert to inches using scaling factor 9.8mV/inch
-    double distance = voltstomilivolts/9.8;
+    // Convert to mm using scaling factor 4.88mV/5mm
+    double distance = (voltstomilivolts/4.88)*5;
     	return distance;
     }
 }

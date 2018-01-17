@@ -2,6 +2,7 @@ package org.usfirst.frc.team6351.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,6 +35,9 @@ public class Robot extends TimedRobot {
 	public static double targetY;
 	public static double targetArea;
 	
+	public static String fms_gameData;
+	boolean fms_dataFound = false;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -63,6 +67,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		getFMSData();
 		Scheduler.getInstance().run();
 	}
 
@@ -92,6 +97,11 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
+		getFMSData();
+		if (fms_gameData == "NONE") {
+			DriverStation.reportError("No FMS Data Retrived During Autonomous Initiliazation: Attempting Looped Search...", false);
+			fms_dataFound = false;
+		}
 	}
 
 	/**
@@ -99,8 +109,18 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-		getLimeLight();
+		getLimeLight();	
+		if (fms_dataFound == false) {
+			getFMSData();
+			if (fms_gameData != "NONE") {
+				DriverStation.reportWarning("FMS Data Retrived", false);
+				fms_dataFound = true;
+				Scheduler.getInstance().run();
+			}
+		} else {
+			Scheduler.getInstance().run();
+		}
+		
 	}
 
 	@Override
@@ -127,5 +147,16 @@ public class Robot extends TimedRobot {
 		targetX = limelight.getEntry("tx").getDouble(0);
 		targetY = limelight.getEntry("ty").getDouble(0);
 		targetArea = limelight.getEntry("ta").getDouble(0);
+	}
+
+	public void getFMSData() {
+		String fms_rawData;
+		fms_rawData = DriverStation.getInstance().getGameSpecificMessage();
+		if (fms_rawData.length() == 0) {
+			fms_gameData = "NONE";
+		} else {
+			fms_gameData = fms_rawData;
+			fms_dataFound = true;
+		}
 	}
 }

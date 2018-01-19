@@ -25,7 +25,7 @@ public class GTADrive extends Command {
     	double leftTrigger = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_Trigger);
     	double leftJoystickXAxis = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_X_Axis);
     	   
-    	//Deadzone
+    	//Deadzone For Joystick
     	if (Math.abs(leftJoystickXAxis) < RobotMap.Deadzone) {
     		leftJoystickXAxis = 0;
     	} else {
@@ -38,6 +38,15 @@ public class GTADrive extends Command {
     			leftJoystickXAxis = (((leftJoystickXAxis - (RobotMap.Deadzone)) * (0.99 - 0)) / (0.99 - RobotMap.Deadzone)) + 0;
 //    			SmartDashboard.putNumber("POS JS AFTER", leftJoystickXAxis);
     		}
+    	}
+    	//Deadzone For Right Trigger
+    	if (Math.abs(rightTrigger) < RobotMap.Deadzone) {
+    		rightTrigger = 0;
+    	} else {
+    			SmartDashboard.putNumber("RT BEFORE", leftJoystickXAxis);
+    		rightTrigger = (((rightTrigger - (RobotMap.Deadzone)) * (1.00 - 0)) / (1.00 - RobotMap.Deadzone)) + 0;
+    			SmartDashboard.putNumber("RT AFTER", leftJoystickXAxis);
+    		
     	}
     	
     	//Creating motor variables

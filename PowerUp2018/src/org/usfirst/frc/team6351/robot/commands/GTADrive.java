@@ -25,6 +25,17 @@ public class GTADrive extends Command {
     	double leftTrigger = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_Trigger);
     	double leftJoystickXAxis = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_X_Axis);
     	   
+    	//Deadzone
+    	if (Math.abs(leftJoystickXAxis) < RobotMap.Deadzone) {
+    		leftJoystickXAxis = 0;
+    	} else {
+    		if (leftJoystickXAxis < 0) {
+    			leftJoystickXAxis = (((leftJoystickXAxis - (-0.99)) * ((0) - (0))) / (((-1)*RobotMap.Deadzone) - (-0.99)) + (-0.99));
+    		} else if (leftJoystickXAxis > 0) {
+    			leftJoystickXAxis = (((leftJoystickXAxis - (RobotMap.Deadzone)) * (0.99 - 0)) / (0.99 - RobotMap.Deadzone)) + 0;
+    		}
+    	}
+    	
     	//Creating motor variables
     	double leftMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop;
     	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop*RobotMap.Curve_Reduction_Factor*(-1);

@@ -10,6 +10,8 @@ public class RobotMap {
 	public static final double Drive_Scaling_Auto = 0.4;
 	public static final double Drive_Scaling_Teleop = 0.6;
 	public static final double Curve_Reduction_Factor = 0.99;
+	
+	public static final double Deadzone = 0.2;
 
 	public static final int Motor_Front_Left  = 1;
 	public static final int Motor_Back_Left = 2;

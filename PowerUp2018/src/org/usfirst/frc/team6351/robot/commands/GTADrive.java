@@ -30,13 +30,13 @@ public class GTADrive extends Command {
     		leftJoystickXAxis = 0;
     	} else {
     		if (leftJoystickXAxis < 0) {
-    			SmartDashboard.putNumber("POS JS BEFORE", leftJoystickXAxis);
-    			leftJoystickXAxis = (((leftJoystickXAxis - (-0.99)) * ((0) - (0))) / (((-1)*RobotMap.Deadzone) - (-0.99)) + (-0.99));
-    			SmartDashboard.putNumber("POS JS AFTER", leftJoystickXAxis);
-    		} else if (leftJoystickXAxis > 0) {
     			SmartDashboard.putNumber("NEG JS BEFORE", leftJoystickXAxis);
-    			leftJoystickXAxis = (((leftJoystickXAxis - (RobotMap.Deadzone)) * (0.99 - 0)) / (0.99 - RobotMap.Deadzone)) + 0;
+    			leftJoystickXAxis = (((leftJoystickXAxis - (-0.99)) * (0 - (-0.99))) / ((-1)*(RobotMap.Deadzone) - (-0.99))) + (-0.99);
     			SmartDashboard.putNumber("NEG JS AFTER", leftJoystickXAxis);
+    		} else if (leftJoystickXAxis > 0) {
+    			SmartDashboard.putNumber("POS JS BEFORE", leftJoystickXAxis);
+    			leftJoystickXAxis = (((leftJoystickXAxis - (RobotMap.Deadzone)) * (0.99 - 0)) / (0.99 - RobotMap.Deadzone)) + 0;
+    			SmartDashboard.putNumber("POS JS AFTER", leftJoystickXAxis);
     		}
     	}
     	

@@ -43,18 +43,18 @@ public class GTADrive extends Command {
     	if (Math.abs(rightTrigger) < RobotMap.TriggerDeadzone) {
     		rightTrigger = 0;
     	} else {
-    			SmartDashboard.putNumber("RT BEFORE", rightTrigger);
+//    			SmartDashboard.putNumber("RT BEFORE", rightTrigger);
     		rightTrigger = (((rightTrigger - (RobotMap.TriggerDeadzone)) * (1.00 - 0)) / (1.00 - RobotMap.TriggerDeadzone)) + 0;
-    			SmartDashboard.putNumber("RT AFTER", rightTrigger);
+//    			SmartDashboard.putNumber("RT AFTER", rightTrigger);
     		
     	}
     	//Deadzone For Left Trigger
     	if (Math.abs(leftTrigger) < RobotMap.TriggerDeadzone) {
     		leftTrigger = 0;
     	} else {
-    			SmartDashboard.putNumber("LT BEFORE", leftTrigger);
+//    			SmartDashboard.putNumber("LT BEFORE", leftTrigger);
     			leftTrigger = (((leftTrigger - (RobotMap.TriggerDeadzone)) * (1.00 - 0)) / (1.00 - RobotMap.TriggerDeadzone)) + 0;
-    			SmartDashboard.putNumber("LT AFTER", leftTrigger);
+//    			SmartDashboard.putNumber("LT AFTER", leftTrigger);
     		
     	}
     	

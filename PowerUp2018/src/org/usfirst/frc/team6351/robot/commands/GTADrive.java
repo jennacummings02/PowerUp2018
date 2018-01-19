@@ -25,8 +25,41 @@ public class GTADrive extends Command {
     	double leftTrigger = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_Trigger);
     	double leftJoystickXAxis = Robot.m_oi.controllerDriverAxisValue(RobotMap.Controller1_Left_X_Axis);
     	   
+    	//Deadzone For Joystick
+    	if (Math.abs(leftJoystickXAxis) < RobotMap.JoystickDeadzone) {
+    		leftJoystickXAxis = 0;
+    	} else {
+    		if (leftJoystickXAxis < 0) {
+//    			SmartDashboard.putNumber("NEG JS BEFORE", leftJoystickXAxis);
+    			leftJoystickXAxis = (((leftJoystickXAxis - (-0.99)) * (0 - (-0.99))) / ((-1)*(RobotMap.JoystickDeadzone) - (-0.99))) + (-0.99);
+//    			SmartDashboard.putNumber("NEG JS AFTER", leftJoystickXAxis);
+    		} else if (leftJoystickXAxis > 0) {
+//    			SmartDashboard.putNumber("POS JS BEFORE", leftJoystickXAxis);
+    			leftJoystickXAxis = (((leftJoystickXAxis - (RobotMap.JoystickDeadzone)) * (0.99 - 0)) / (0.99 - RobotMap.JoystickDeadzone)) + 0;
+//    			SmartDashboard.putNumber("POS JS AFTER", leftJoystickXAxis);
+    		}
+    	}
+    	//Deadzone For Right Trigger
+    	if (Math.abs(rightTrigger) < RobotMap.TriggerDeadzone) {
+    		rightTrigger = 0;
+    	} else {
+    			SmartDashboard.putNumber("RT BEFORE", rightTrigger);
+    		rightTrigger = (((rightTrigger - (RobotMap.TriggerDeadzone)) * (1.00 - 0)) / (1.00 - RobotMap.TriggerDeadzone)) + 0;
+    			SmartDashboard.putNumber("RT AFTER", rightTrigger);
+    		
+    	}
+    	//Deadzone For Left Trigger
+    	if (Math.abs(leftTrigger) < RobotMap.TriggerDeadzone) {
+    		leftTrigger = 0;
+    	} else {
+    			SmartDashboard.putNumber("LT BEFORE", leftTrigger);
+    			leftTrigger = (((leftTrigger - (RobotMap.TriggerDeadzone)) * (1.00 - 0)) / (1.00 - RobotMap.TriggerDeadzone)) + 0;
+    			SmartDashboard.putNumber("LT AFTER", leftTrigger);
+    		
+    	}
+    	
     	//Creating motor variables
-    	double leftMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop;
+    	double leftMotors = ((rightTrigger) - leftTrigger + leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop;
     	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop*RobotMap.Curve_Reduction_Factor*(-1);
     	
     	if (leftMotors > RobotMap.MAX_ROBOT_SPEED) {

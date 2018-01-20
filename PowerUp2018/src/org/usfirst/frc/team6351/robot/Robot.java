@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team6351.robot.commands.FlightStickDrive;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
+import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Sensors;
 
@@ -49,6 +50,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());
@@ -112,17 +114,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		getLimeLight();	
-		if (fms_dataFound == false) {
-			getFMSData();
-			if (fms_gameData != "NONE") {
-				DriverStation.reportWarning("FMS Data Retrived", false);
-				fms_dataFound = true;
-				Scheduler.getInstance().run();
-			}
-		} else {
-			Scheduler.getInstance().run();
-		}
-		
+//		if (fms_dataFound == false) {
+//			getFMSData();
+//			if (fms_gameData != "NONE") {
+//				DriverStation.reportWarning("FMS Data Retrived", false);
+//				fms_dataFound = true;
+//				Scheduler.getInstance().run();
+//			}
+//		} else {
+//			Scheduler.getInstance().run();
+//		}
+		Scheduler.getInstance().run();
 	}
 
 	@Override

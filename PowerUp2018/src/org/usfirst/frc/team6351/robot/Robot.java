@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team6351.robot.commands.FlightStickDrive;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
+import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team6351.robot.subsystems.Sensors;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,6 +25,7 @@ import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
 	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final Sensors sensors = new Sensors();
 	public static OI m_oi;
 	
 	Command m_autonomousCommand;
@@ -47,6 +50,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_autonomousChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
 		SmartDashboard.putData("Auto mode", m_autonomousChooser);
 		
 //	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());

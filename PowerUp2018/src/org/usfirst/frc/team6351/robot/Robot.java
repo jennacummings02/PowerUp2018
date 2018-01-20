@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team6351.robot.commands.Auto_DriveStraight;
 import org.usfirst.frc.team6351.robot.commands.FlightStickDrive;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
@@ -50,6 +51,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_autonomousChooser.addObject("Drive Straight", new Auto_DriveStraight(0.5,2));
 		m_autonomousChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
 		SmartDashboard.putData("Auto mode", m_autonomousChooser);
 		
@@ -125,7 +127,6 @@ public class Robot extends TimedRobot {
 		} else {
 			Scheduler.getInstance().run();
 		}
-		
 	}
 
 	@Override

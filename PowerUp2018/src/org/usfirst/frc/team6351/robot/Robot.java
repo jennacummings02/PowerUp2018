@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> m_autonomousChooser = new SendableChooser<>();
 	SendableChooser<Command> driveMode = new SendableChooser<>();
 
 	static NetworkTableInstance networktables = NetworkTableInstance.getDefault();
@@ -47,12 +47,13 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putData("Auto mode", m_autonomousChooser);
 		
-	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());
+//	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());
 	    driveMode.addDefault("Two-Person GTA Control", new GTADrive());
 	    SmartDashboard.putData("Drive Control Mode", driveMode);
 
+	    fms_dataFound = false;
 	}
 
 	/**
@@ -84,7 +85,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = m_autonomousChooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

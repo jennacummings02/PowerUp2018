@@ -5,6 +5,7 @@ import org.usfirst.frc.team6351.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,8 +18,10 @@ public class Auto_DriveStraight extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
+    	requires(Robot.sensors);
     	spd = speed;
     	tme = time;
+    	
     }
 
     // Called just before this Command runs the first time

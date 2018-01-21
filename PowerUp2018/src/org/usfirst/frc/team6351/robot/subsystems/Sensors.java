@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class Sensors extends Subsystem {
     
@@ -16,12 +17,14 @@ public class Sensors extends Subsystem {
 	public Gyro gyro;
 	public Accelerometer accel;
 	public AnalogInput ultrasonic;
+	public Encoder driveEncoderLeft;
 	
 	public Sensors() {
 		
 		gyro = new ADXRS450_Gyro();
 		accel = new BuiltInAccelerometer();
 		ultrasonic = new AnalogInput(0);
+		driveEncoderLeft = new Encoder(0,1,true,Encoder.EncodingType.k4X);
 		
 	}
 	
@@ -41,10 +44,16 @@ public class Sensors extends Subsystem {
     }
     public double getUltrasonicDistance() {
     	// Convert the volts from the function to millivolts
-    double voltstomilivolts = ultrasonic.getVoltage() * 1000;
-    // Convert to mm using scaling factor 4.88mV/5mm
-    double distance = (voltstomilivolts/4.88)*5;
+    	double voltstomilivolts = ultrasonic.getVoltage() * 1000;
+    	// Convert to mm using scaling factor ~0.977mV/mm
+    	double distance = (voltstomilivolts/(4.592/4700));
     	return distance;
+    }
+    public double getDriveEncoderDistance() {
+    	//Convert counts to centimeters
+    	double distanceCM = (driveEncoderLeft.get()) / (8.00);
+    	double distanceIN = (driveEncoderLeft.get()) / (20.32);
+    	return distanceCM;
     }
 }
 

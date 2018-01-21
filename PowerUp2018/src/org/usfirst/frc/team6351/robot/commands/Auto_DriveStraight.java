@@ -12,27 +12,57 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Auto_DriveStraight extends Command {
 	
-	double spd, tme;
+	double spd, tme, dst;
+	boolean encoderDrive;
 	
-    public Auto_DriveStraight(double speed, double time) {
+    public Auto_DriveStraight(double speed, double time, double distance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
     	requires(Robot.sensors);
     	spd = speed;
-    	tme = time;
+    	
+    	if (time == 0.0) {
+    		encoderDrive = true;
+    		dst = distance;
+    	} else {
+        	tme = time;
+    	}
+    	
+    }
+    
+    public Auto_DriveStraight(double distance) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	this(RobotMap.Drive_Scaling_Auto, 0.0, distance);
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.setLeft(spd);
-    	Robot.driveTrain.setRight((spd)*RobotMap.Curve_Reduction_Factor*(-1));
-    	Timer.delay(tme);
+    	if (encoderDrive == true) {
+    		Robot.sensors.driveEncoderLeft.reset();
+    		Robot.driveTrain.setLeft(spd);
+    		Robot.driveTrain.setRight((spd)*RobotMap.Curve_Reduction_Factor*(-1));
+    	} else {
+    		Robot.driveTrain.setLeft(spd);
+    		Robot.driveTrain.setRight((spd)*RobotMap.Curve_Reduction_Factor*(-1));
+    		Timer.delay(tme);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (encoderDrive == true) {
+    		double currentDistance = Robot.sensors.getDriveEncoderDistance();
+    		if (currentDistance >= dst - 20.0) {
+    			Robot.driveTrain.setLeft(0.0);
+        		Robot.driveTrain.setRight(0.0);
+    		}
+    	} else {
+    		Robot.driveTrain.setLeft(0.0);
+    		Robot.driveTrain.setRight(0.0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

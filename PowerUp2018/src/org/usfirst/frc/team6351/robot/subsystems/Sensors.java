@@ -53,7 +53,7 @@ public class Sensors extends Subsystem {
     	//Convert counts to centimeters
     	double distanceCM = (driveEncoderLeft.get()) / (8.00);
     	double distanceIN = (driveEncoderLeft.get()) / (20.32);
-    	return distanceCM;
+    	return distanceIN;
     }
 }
 

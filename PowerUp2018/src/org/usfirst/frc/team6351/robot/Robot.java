@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team6351.robot.commands.Auto_DriveStraight;
+import org.usfirst.frc.team6351.robot.commands.Auto_DriveToCrosshairs;
+import org.usfirst.frc.team6351.robot.commands.Auto_TurnToCrosshairs;
 import org.usfirst.frc.team6351.robot.commands.FlightStickDrive;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static double targetX;
 	public static double targetY;
 	public static double targetArea;
+	public static double targetsVisible;
 	
 	public static String fms_gameData;
 	boolean fms_dataFound = false;
@@ -53,6 +56,8 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		m_autonomousChooser.addObject("Drive Straight", new Auto_DriveStraight(0.5,2));
 		m_autonomousChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
+		m_autonomousChooser.addDefault("Turn To Target", new Auto_TurnToCrosshairs());
+		m_autonomousChooser.addDefault("Drive To Target", new Auto_DriveToCrosshairs());
 		SmartDashboard.putData("Auto mode", m_autonomousChooser);
 		
 //	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());
@@ -75,6 +80,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		getFMSData();
+		getLimeLight();	
 		Scheduler.getInstance().run();
 	}
 
@@ -153,6 +159,7 @@ public class Robot extends TimedRobot {
 		targetX = limelight.getEntry("tx").getDouble(0);
 		targetY = limelight.getEntry("ty").getDouble(0);
 		targetArea = limelight.getEntry("ta").getDouble(0);
+		targetsVisible = limelight.getEntry("tv").getDouble(0);
 	}
 
 	public void getFMSData() {

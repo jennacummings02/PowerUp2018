@@ -3,6 +3,7 @@ package org.usfirst.frc.team6351.robot.commands;
 import org.usfirst.frc.team6351.robot.Robot;
 import org.usfirst.frc.team6351.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,6 +26,7 @@ public class Auto_DriveStraight extends Command {
     	if (time == 0.0) {
     		encoderDrive = true;
     		dst = distance;
+    		DriverStation.reportError("Test. Time = 0", false);
     	} else {
         	tme = time;
     	}
@@ -42,8 +44,10 @@ public class Auto_DriveStraight extends Command {
     protected void initialize() {
     	if (encoderDrive == true) {
     		Robot.sensors.driveEncoderLeft.reset();
+    		DriverStation.reportError("Test. Reset", false);
     		Robot.driveTrain.setLeft(spd);
     		Robot.driveTrain.setRight((spd)*RobotMap.Curve_Reduction_Factor*(-1));
+    		DriverStation.reportError("Test. Set to Speed", false);
     	} else {
     		Robot.driveTrain.setLeft(spd);
     		Robot.driveTrain.setRight((spd)*RobotMap.Curve_Reduction_Factor*(-1));
@@ -54,8 +58,10 @@ public class Auto_DriveStraight extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (encoderDrive == true) {
+    		DriverStation.reportError("Test. Execute Loop", false);
     		double currentDistance = Robot.sensors.getDriveEncoderDistance();
-    		if (currentDistance >= dst - 20.0) {
+    		DriverStation.reportError("Test. Current Distance"+currentDistance, false);
+    		if (currentDistance >= dst - 3.0) {
     			Robot.driveTrain.setLeft(0.0);
         		Robot.driveTrain.setRight(0.0);
     		}
@@ -67,7 +73,7 @@ public class Auto_DriveStraight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -56,7 +56,6 @@ public class Auto_DriveStraight extends Command {
     protected void execute() {
     	if (encoderDrive == true) {
     		double currentDistance = Robot.sensors.getDriveEncoderDistance();
-    		DriverStation.reportError("Test. Current Distance"+currentDistance, false);
     		if (currentDistance >= dst - 3.0) {
     			Robot.driveTrain.setLeft(0.0);
         		Robot.driveTrain.setRight(0.0);

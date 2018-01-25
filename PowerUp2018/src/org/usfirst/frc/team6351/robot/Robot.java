@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		m_autonomousChooser.addObject("Drive Straight", new Auto_DriveStraight(0.5,2));
+		m_autonomousChooser.addObject("Drive Straight", new Auto_DriveStraight(24));
 		m_autonomousChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
 		SmartDashboard.putData("Auto mode", m_autonomousChooser);
 		

@@ -15,6 +15,7 @@ import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Sensors;
+import org.usfirst.frc.team6351.robot.subsystems.UpperArm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +28,7 @@ import org.usfirst.frc.team6351.robot.subsystems.Sensors;
 public class Robot extends TimedRobot {
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Sensors sensors = new Sensors();
+	public static final UpperArm upperArm = new UpperArm();
 	public static OI m_oi;
 	
 	Command m_autonomousCommand;

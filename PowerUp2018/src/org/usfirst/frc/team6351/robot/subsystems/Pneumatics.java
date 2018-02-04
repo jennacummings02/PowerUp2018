@@ -14,6 +14,7 @@ public class Pneumatics extends Subsystem {
 	static Compressor compressor;
 	static Solenoid s1 = new Solenoid(0);
 	static Solenoid s2 = new Solenoid(1);
+	static Solenoid climb = new Solenoid(2);
 	  
 	public Pneumatics(){
 		compressor = new Compressor();
@@ -65,5 +66,7 @@ public class Pneumatics extends Subsystem {
     	s1.set(op);
     	s2.set(op);
     }
+    public void deployHook(boolean op) {
+        climb.set(op);
+    }	
 }
-

@@ -10,14 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class EndGame_Climb extends Command {
 	
-	double tme;
-	
 	public EndGame_Climb(double time) {
 		
 		// Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        	// eg. requires(chassis);
 		requires(Robot.Pneumatics);
-		button hookDeployer = Robot.m_oi.controllerRightBumper;
+		button rightButton = Robot.m_oi.controllerRightBumper;
 		time = tme;
 		
 	}
@@ -35,7 +33,7 @@ public class EndGame_Climb extends Command {
     		
     	boolean endGame; 
     	
-    		if (tme >= 120.0 && tme <= 150) {
+    		if (tme >= 120.0 && tme <= 150.0) {
     			endGame = true;
     			startCompressor();
         	} else {
@@ -44,7 +42,7 @@ public class EndGame_Climb extends Command {
     		
     		// Allows right button on controller to operate hook
     		while (endGame = true) {
-    			hookDeployer.whenPressed(deployHook(boolean op));
+    			rightButton.whenPressed(deployHook);
     		}
     		
     }
@@ -56,11 +54,13 @@ public class EndGame_Climb extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+	// Command will not end before game does
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	// Other command will be excuted without interference
     }
 	
 }
